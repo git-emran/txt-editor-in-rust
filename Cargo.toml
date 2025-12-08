@@ -1,5 +1,5 @@
 [package]
-name = "txt_editor"
+name = "Rusty"
 version = "0.1.0"
 edition = "2024"
 
