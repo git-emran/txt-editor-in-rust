@@ -17,12 +17,7 @@ pub struct Position {
     pub col: usize,
     pub row: usize,
 }
-/// Represents the Terminal.
-/// Edge Case for platforms where `usize` < `u16`:
-/// Regardless of the actual size of the Terminal, this representation
-/// only spans over at most `usize::MAX` or `u16::size` rows/columns, whichever is smaller.
-/// Each size returned truncates to min(`usize::MAX`, `u16::MAX`)
-/// And should you attempt to set the caret out of these bounds, it will also be truncated.
+// This is the terminal
 pub struct Terminal;
 
 impl Terminal {

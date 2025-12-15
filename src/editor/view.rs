@@ -26,7 +26,6 @@ impl View {
         if !self.needs_redraw {
             return;
         }
-
         let Size { height, width } = self.size;
 
         if height == 0 || width == 0 {
