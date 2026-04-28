@@ -1,5 +1,5 @@
 use crossterm::event::{Event, KeyCode, KeyEvent, KeyModifiers};
-use std::{convert::TryFrom, fmt::format};
+use std::convert::TryFrom;
 
 use super::terminal::Size;
 

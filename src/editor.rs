@@ -11,12 +11,6 @@ use editorcommand::EditorCommand;
 use terminal::Terminal;
 use view::View;
 
-#[derive(Copy, Clone, Default)]
-struct Location {
-    x: usize,
-    y: usize,
-}
-
 pub struct Editor {
     should_quit: bool,
     view: View,
@@ -95,7 +89,7 @@ impl Editor {
     fn refresh_screen(&mut self) {
         let _ = Terminal::hide_caret();
         self.view.render();
-        Terminal::move_caret_to(self.view.get_position());
+        let _ = Terminal::move_caret_to(self.view.get_position());
         let _ = Terminal::show_caret();
         let _ = Terminal::execute();
     }
