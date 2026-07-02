@@ -140,6 +140,32 @@ impl View {
         Position { col, row }
     }
 
+    fn move_text_location(&mut self, direction: &Direction) {
+        let Size { height, .. } = self.size;
+
+        match direction {
+            Direction::Up => self.move_up(1),
+            Direction::Down => self.move_down(1),
+            Direction::Left => self.move_left(),
+            Direction::Right => self.move_right(),
+            Direction::PageUp => self.move_up(height.saturating_sub(1)),
+            Direction::PageDown => self.move_down(height.saturating_sub(1)),
+            Direction::Home => self.move_to_start_of_line(),
+            Direction::End => self.move_to_end_of_line(),
+        }
+    }
+
+    fn move_up(&mut self) {
+        self.text_location.line_index = self.text_location.line_index.saturating_sub(step);
+        self.snap_to_valid_grapheme();
+    }
+
+    fn move_down(&mut self) {
+        self.text_location.line_index = self.text_location.line_index.saturating_add(step);
+        self.snap_to_valid_grapheme();
+        self.snap_to_valid_line();
+    }
+
     fn render_line(at: usize, line_text: &str) {
         let result = Terminal::print_row(at, line_text);
         debug_assert!(result.is_ok(), "Failed to render line");
